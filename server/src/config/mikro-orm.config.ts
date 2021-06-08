@@ -79,7 +79,9 @@ export const mikroOrmConf = {
   driverOptions:
     process.env.NODE_ENV === 'production'
       ? {
-          connection: { ssl: { rejectUnauthorized: false } }
+          connection: {
+            ssl: process.env.POSTGRESQL_SSL === 'true' ? true : false
+          }
         }
       : {},
   resultCache:

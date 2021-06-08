@@ -17,22 +17,20 @@ services:
         value: ${db.DATABASE_URL}
       - key: CA_CERT
         value: ${db.CA_CERT}
-      - key: REDIS_URL
-        value: ${redis.REDIS_URL}
       - key: ACCESS_TOKEN_SECRET
-        value: <ACCESS_TOKEN_SECRET>
+        value: abc123
       - key: BUCKET
-        value: <BUCKET>
+        value: https://media.stiforr.tech.nyc3.digitaloceanspaces.com/
       - key: AWS_ACCESS_KEY_ID
         value: <AWS_ACCESS_KEY_ID>
       - key: AWS_SECRET_ACCESS_KEY
         value: <AWS_SECRET_ACCESS_KEY>
       - key: AWS_ENDPOINT
-        value: <AWS_ENDPOINT>
+        value: nyc3.digitaloceanspaces.com
       - key: MEDIA_DOMAIN
-        value: <MEDIA_DOMAIN>
-      - key: SENTRY_DSN
-        value: <SENTRY_DSN>
+        value: https://media.stiforr.tech.nyc3.digitaloceanspaces.com/
+      # - key: SENTRY_DSN
+      #   value: <SENTRY_DSN>
       - key: COMET_USER_PASSWORD
         value: <COMET_USER_PASSWORD>
 databases:
@@ -42,10 +40,6 @@ databases:
     cluster_name: comet
     db_name: defaultdb
     db_user: doadmin
-  - name: redis
-    engine: REDIS
-    production: true
-    cluster_name: comet-redis
 domains:
-  - domain: api.joincomet.app
+  - domain: api.stiforr.tech
     type: PRIMARY
