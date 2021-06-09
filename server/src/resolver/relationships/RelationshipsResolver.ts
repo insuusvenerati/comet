@@ -32,7 +32,8 @@ export class RelationshipsResolver {
   @Mutation(() => User)
   async createFriendRequest(
     @Ctx() ctx: Context,
-    @Arg('input') input: CreateFriendRequestInput,
+    @Arg('input', () => CreateFriendRequestInput)
+    input: CreateFriendRequestInput,
     @PubSub(SubscriptionTopic.MessageChanged)
     messageChanged: Publisher<ChangePayload>
   ): Promise<User> {
@@ -43,7 +44,8 @@ export class RelationshipsResolver {
   @Mutation(() => User)
   async deleteFriendRequest(
     @Ctx() ctx: Context,
-    @Arg('input') input: DeleteFriendRequestInput
+    @Arg('input', () => DeleteFriendRequestInput)
+    input: DeleteFriendRequestInput
   ): Promise<User> {
     return deleteFriendRequest(ctx, input)
   }
@@ -52,7 +54,8 @@ export class RelationshipsResolver {
   @Mutation(() => User)
   async answerFriendRequest(
     @Ctx() ctx: Context,
-    @Arg('input') input: AnswerFriendRequestInput
+    @Arg('input', () => AnswerFriendRequestInput)
+    input: AnswerFriendRequestInput
   ): Promise<User> {
     return answerFriendRequest(ctx, input)
   }
@@ -61,7 +64,7 @@ export class RelationshipsResolver {
   @Mutation(() => User)
   async blockUser(
     @Ctx() ctx: Context,
-    @Arg('input') input: BlockUserInput
+    @Arg('input', () => BlockUserInput) input: BlockUserInput
   ): Promise<User> {
     return blockUser(ctx, input)
   }
@@ -70,7 +73,7 @@ export class RelationshipsResolver {
   @Mutation(() => User)
   async unblockUser(
     @Ctx() ctx: Context,
-    @Arg('input') input: UnblockUserInput
+    @Arg('input', () => UnblockUserInput) input: UnblockUserInput
   ): Promise<User> {
     return unblockUser(ctx, input)
   }
@@ -79,7 +82,7 @@ export class RelationshipsResolver {
   @Mutation(() => User)
   async removeFriend(
     @Ctx() ctx: Context,
-    @Arg('input') input: RemoveFriendInput
+    @Arg('input', () => RemoveFriendInput) input: RemoveFriendInput
   ): Promise<User> {
     return removeFriend(ctx, input)
   }
@@ -88,7 +91,7 @@ export class RelationshipsResolver {
   @Mutation(() => User)
   async readDm(
     @Ctx() ctx: Context,
-    @Arg('input') input: ReadDmInput
+    @Arg('input', () => ReadDmInput) input: ReadDmInput
   ): Promise<User> {
     return readDm(ctx, input)
   }
@@ -97,7 +100,7 @@ export class RelationshipsResolver {
   @Mutation(() => User)
   async openDm(
     @Ctx() ctx: Context,
-    @Arg('input') input: OpenDmInput
+    @Arg('input', () => OpenDmInput) input: OpenDmInput
   ): Promise<User> {
     return openDm(ctx, input)
   }
@@ -106,7 +109,7 @@ export class RelationshipsResolver {
   @Mutation(() => User)
   async closeDm(
     @Ctx() ctx: Context,
-    @Arg('input') input: CloseDmInput
+    @Arg('input', () => CloseDmInput) input: CloseDmInput
   ): Promise<User> {
     return closeDm(ctx, input)
   }

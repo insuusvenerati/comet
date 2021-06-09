@@ -26,15 +26,15 @@ import { GraphQLNonNegativeInt } from 'graphql-scalars'
 @ObjectType({ implements: BaseEntity })
 @Entity()
 export class Server extends BaseEntity {
-  @Field()
+  @Field(() => String)
   @Property({ columnType: 'text' })
   name: string
 
-  @Field()
+  @Field(() => String)
   @Property({ columnType: 'text' })
   displayName: string
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   @Property({ nullable: true, columnType: 'text' })
   description?: string
 
@@ -75,31 +75,31 @@ export class Server extends BaseEntity {
   @Field(() => GraphQLNonNegativeInt)
   onlineCount: number = 0
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   @Property({ nullable: true, columnType: 'text' })
   avatarUrl?: string
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   @Property({ nullable: true, columnType: 'text' })
   bannerUrl?: string
 
-  @Field()
+  @Field(() => Boolean)
   @Property()
   isBanned: boolean = false
 
-  @Field()
+  @Field(() => Boolean)
   @Property()
   isDeleted: boolean = false
 
-  @Field()
+  @Field(() => Boolean)
   @Property()
   isPublic: boolean = true
 
-  @Field()
+  @Field(() => Boolean)
   @Property()
   isChatEnabled: boolean = true
 
-  @Field()
+  @Field(() => Boolean)
   @Property()
   isDownvotesEnabled: boolean = false
 
@@ -112,10 +112,10 @@ export class Server extends BaseEntity {
   @Field(() => [ServerPermission])
   permissions: ServerPermission[]
 
-  @Field()
+  @Field(() => Boolean)
   @Property()
   isFeatured: boolean = false
 
-  @Field()
+  @Field(() => Boolean)
   isJoined: boolean
 }

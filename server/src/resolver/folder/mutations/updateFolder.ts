@@ -9,21 +9,21 @@ import {
   UserFolder
 } from '@/entity'
 import { Context } from '@/types'
-import {logger, uploadImageFileSingle} from '@/util'
+import { logger, uploadImageFileSingle } from '@/util'
 
 @InputType()
 export class UpdateFolderInput {
   @Field(() => ID)
   folderId: string
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   @Length(1, 100)
   name?: string
 
   @Field(() => GraphQLUpload, { nullable: true })
   avatarFile?: FileUpload
 
-  @Field({ nullable: true })
+  @Field(() => Boolean, { nullable: true })
   isCollaborative?: boolean
 
   @Field(() => FolderVisibility, { nullable: true })

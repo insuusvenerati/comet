@@ -1,14 +1,14 @@
 import { Server } from '@/entity'
 import { Context } from '@/types'
 import { ArgsType, Field, ID } from 'type-graphql'
-import {handleUnderscore, logger} from '@/util'
+import { handleUnderscore, logger } from '@/util'
 
 @ArgsType()
 export class ServerArgs {
   @Field(() => ID, { nullable: true })
   id?: string
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   name?: string
 }
 

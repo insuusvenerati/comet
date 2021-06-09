@@ -24,9 +24,7 @@ export class RepliesResolver {
   // --- Queries ---
   @Authorized()
   @Query(() => [Reply])
-  async replies(
-    @Ctx() ctx: Context
-  ): Promise<Reply[]> {
+  async replies(@Ctx() ctx: Context): Promise<Reply[]> {
     return replies(ctx)
   }
 
@@ -35,7 +33,7 @@ export class RepliesResolver {
   @Mutation(() => Reply)
   async markReplyRead(
     @Ctx() ctx: Context,
-    @Arg('input') input: MarkReplyReadInput,
+    @Arg('input', () => MarkReplyReadInput) input: MarkReplyReadInput,
     @PubSub(SubscriptionTopic.ReplyChanged)
     notifyReplyChanged: Publisher<ChangePayload>
   ): Promise<Reply> {
@@ -46,7 +44,7 @@ export class RepliesResolver {
   @Mutation(() => Reply)
   async markReplyUnread(
     @Ctx() ctx: Context,
-    @Arg('input') input: MarkReplyUnreadInput,
+    @Arg('input', () => MarkReplyUnreadInput) input: MarkReplyUnreadInput,
     @PubSub(SubscriptionTopic.ReplyChanged)
     notifyReplyChanged: Publisher<ChangePayload>
   ): Promise<Reply> {

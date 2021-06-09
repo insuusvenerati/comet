@@ -49,7 +49,7 @@ export class ChannelResolver {
   @Mutation(() => Channel)
   async createChannel(
     @Ctx() ctx: Context,
-    @Arg('input') input: CreateChannelInput
+    @Arg('input', () => CreateChannelInput) input: CreateChannelInput
   ): Promise<Channel> {
     return createChannel(ctx, input)
   }
@@ -58,7 +58,7 @@ export class ChannelResolver {
   @Mutation(() => Channel)
   async updateChannel(
     @Ctx() ctx: Context,
-    @Arg('input') input: UpdateChannelInput
+    @Arg('input', () => UpdateChannelInput) input: UpdateChannelInput
   ): Promise<Channel> {
     return updateChannel(ctx, input)
   }
@@ -67,7 +67,7 @@ export class ChannelResolver {
   @Mutation(() => ID)
   async deleteChannel(
     @Ctx() ctx: Context,
-    @Arg('input') input: DeleteChannelInput
+    @Arg('input', () => DeleteChannelInput) input: DeleteChannelInput
   ): Promise<string> {
     return deleteChannel(ctx, input)
   }
@@ -76,7 +76,7 @@ export class ChannelResolver {
   @Mutation(() => Channel)
   async moveChannel(
     @Ctx() ctx: Context,
-    @Arg('input') input: MoveChannelInput
+    @Arg('input', () => MoveChannelInput) input: MoveChannelInput
   ): Promise<Channel> {
     return moveChannel(ctx, input)
   }
@@ -85,7 +85,7 @@ export class ChannelResolver {
   @Mutation(() => Channel)
   async readChannel(
     @Ctx() ctx: Context,
-    @Arg('input') input: ReadChannelInput
+    @Arg('input', () => ReadChannelInput) input: ReadChannelInput
   ): Promise<Channel> {
     return readChannel(ctx, input)
   }

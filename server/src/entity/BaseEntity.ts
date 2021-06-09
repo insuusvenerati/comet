@@ -7,7 +7,7 @@ export abstract class BaseEntity {
   @PrimaryKey({ type: BigIntType })
   id!: string
 
-  @Field()
+  @Field(() => Date)
   @Property()
   createdAt: Date = new Date()
 }

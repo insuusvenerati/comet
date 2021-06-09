@@ -15,21 +15,26 @@ import {
   ServerUser,
   ServerUserStatus
 } from '@/entity'
-import {handleUnderscore, logger, ReorderUtils, uploadImageFileSingle} from '@/util'
+import {
+  handleUnderscore,
+  logger,
+  ReorderUtils,
+  uploadImageFileSingle
+} from '@/util'
 import { serverRegex } from '@/util/text/serverRegex'
 
 @InputType()
 export class CreateServerInput {
-  @Field()
+  @Field(() => String)
   @Length(3, 21)
   @Matches(serverRegex, { message: 'Letters, numbers and underscores only' })
   name: string
 
-  @Field()
+  @Field(() => String)
   @Length(2, 100)
   displayName: string
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   @Length(0, 500)
   description?: string
 

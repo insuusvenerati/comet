@@ -19,7 +19,7 @@ import { GraphQLHexColorCode } from 'graphql-scalars'
 @ObjectType({ implements: BaseEntity })
 @Entity()
 export class Role extends BaseEntity {
-  @Field()
+  @Field(() => String)
   @Property({ columnType: 'text' })
   name: string
 
@@ -29,7 +29,7 @@ export class Role extends BaseEntity {
   @OneToMany(() => ServerUser, 'role')
   serverUsers = new Collection<ServerUser>(this)
 
-  @Field()
+  @Field(() => String)
   @Property()
   isDefault: boolean = false
 

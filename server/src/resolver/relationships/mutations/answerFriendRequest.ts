@@ -1,14 +1,14 @@
 import { Field, ID, InputType } from 'type-graphql'
 import { RelationshipStatus, User } from '@/entity'
 import { Context } from '@/types'
-import {logger} from "@/util";
+import { logger } from '@/util'
 
 @InputType()
 export class AnswerFriendRequestInput {
   @Field(() => ID)
   userId: string
 
-  @Field()
+  @Field(() => Boolean)
   accept: boolean
 }
 

@@ -28,12 +28,12 @@ import { CustomError } from '@/types/CustomError'
 import { InMemoryLiveQueryStore } from '@n1ru4l/in-memory-live-query-store'
 import { GraphQLEmailAddress, GraphQLNonNegativeInt } from 'graphql-scalars'
 import { Color } from '@/types'
-import {logger, randomEnum} from '@/util'
+import { logger, randomEnum } from '@/util'
 
 @ObjectType({ implements: BaseEntity })
 @Entity()
 export class User extends BaseEntity {
-  @Field()
+  @Field(() => String)
   @Property({ columnType: 'text' })
   username: string
 
@@ -42,14 +42,14 @@ export class User extends BaseEntity {
   @Property({ columnType: 'text', nullable: true })
   email: string
 
-  @Field({ nullable: true })
+  @Field(() => Date, { nullable: true })
   @Property({ nullable: true })
   lastLoginAt?: Date
 
-  @Field({ nullable: true })
+  @Field(() => Date, { nullable: true })
   lastMessageAt?: Date
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   @Property({ nullable: true, columnType: 'text' })
   avatarUrl?: string
 
@@ -59,7 +59,7 @@ export class User extends BaseEntity {
   })
   onlineStatus: OnlineStatus = OnlineStatus.Online
 
-  @Field()
+  @Field(() => Boolean)
   @Property()
   isAdmin: boolean = false
 
@@ -67,7 +67,7 @@ export class User extends BaseEntity {
   @Enum({ items: () => Color })
   color: Color = randomEnum(Color)
 
-  @Field()
+  @Field(() => Boolean)
   isCurrentUser: boolean
 
   @Property({ columnType: 'text' })
@@ -116,17 +116,17 @@ export class User extends BaseEntity {
   @Field(() => GraphQLNonNegativeInt)
   unreadCount: number
 
-  @Field()
+  @Field(() => Boolean)
   showChat: boolean
 
   @Field(() => RelationshipStatus)
   relationshipStatus: RelationshipStatus
 
-  @Field()
+  @Field(() => Boolean)
   @Property({ default: false })
   isOg: boolean = false
 
-  @Field()
+  @Field(() => Boolean)
   get isOnline(): boolean {
     if (!this.lastLoginAt) return false
     const timeout = 5 * 60 * 1000 // five minutes

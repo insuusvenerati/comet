@@ -49,7 +49,7 @@ export class Message extends BaseEntity {
   })
   toUser?: User
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   @Property({ columnType: 'text', nullable: true })
   text?: string
 
@@ -57,7 +57,7 @@ export class Message extends BaseEntity {
   @Embedded(() => Image, { object: true, array: true })
   images: Image[] = []
 
-  @Field({ nullable: true })
+  @Field(() => File, { nullable: true })
   @Embedded(() => File, { object: true, nullable: true })
   file?: File
 
@@ -69,23 +69,23 @@ export class Message extends BaseEntity {
   @ManyToMany(() => User)
   mentionedUsers = new Collection<User>(this)
 
-  @Field()
+  @Field(() => Boolean)
   @Property()
   isEveryoneMentioned: boolean = false
 
-  @Field()
+  @Field(() => Boolean)
   @Property()
   isPinned: boolean = false
 
-  @Field({ nullable: true })
+  @Field(() => Date, { nullable: true })
   @Property({ nullable: true })
   updatedAt?: Date
 
-  @Field({ nullable: true })
+  @Field(() => Date, { nullable: true })
   @Property({ nullable: true })
   pinnedAt?: Date
 
-  @Field()
+  @Field(() => Boolean)
   @Property()
   isDeleted: boolean = false
 

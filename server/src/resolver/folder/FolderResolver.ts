@@ -77,7 +77,7 @@ export class FolderResolver {
   @Mutation(() => Folder)
   async createFolder(
     @Ctx() ctx: Context,
-    @Arg('input') input: CreateFolderInput
+    @Arg('input', () => CreateFolderInput) input: CreateFolderInput
   ): Promise<Folder> {
     return createFolder(ctx, input)
   }
@@ -86,7 +86,7 @@ export class FolderResolver {
   @Mutation(() => Folder)
   async updateFolder(
     @Ctx() ctx: Context,
-    @Arg('input') input: UpdateFolderInput
+    @Arg('input', () => UpdateFolderInput) input: UpdateFolderInput
   ): Promise<Folder> {
     return updateFolder(ctx, input)
   }
@@ -95,7 +95,7 @@ export class FolderResolver {
   @Mutation(() => Boolean)
   async deleteFolder(
     @Ctx() ctx: Context,
-    @Arg('input') input: DeleteFolderInput
+    @Arg('input', () => DeleteFolderInput) input: DeleteFolderInput
   ): Promise<boolean> {
     return deleteFolder(ctx, input)
   }
@@ -104,7 +104,7 @@ export class FolderResolver {
   @Mutation(() => Folder)
   async moveUserFolder(
     @Ctx() ctx: Context,
-    @Arg('input') input: MoveUserFolderInput
+    @Arg('input', () => MoveUserFolderInput) input: MoveUserFolderInput
   ): Promise<Folder> {
     return moveUserFolder(ctx, input)
   }
@@ -113,7 +113,7 @@ export class FolderResolver {
   @Mutation(() => Folder)
   async moveServerFolder(
     @Ctx() ctx: Context,
-    @Arg('input') input: MoveServerFolderInput
+    @Arg('input', () => MoveServerFolderInput) input: MoveServerFolderInput
   ): Promise<Folder> {
     return moveServerFolder(ctx, input)
   }
@@ -122,7 +122,7 @@ export class FolderResolver {
   @Mutation(() => Folder)
   async followFolder(
     @Ctx() ctx: Context,
-    @Arg('input') input: FollowFolderInput
+    @Arg('input', () => FollowFolderInput) input: FollowFolderInput
   ): Promise<Folder> {
     return followFolder(ctx, input)
   }
@@ -131,7 +131,7 @@ export class FolderResolver {
   @Mutation(() => Folder)
   async unfollowFolder(
     @Ctx() ctx: Context,
-    @Arg('input') input: UnfollowFolderInput
+    @Arg('input', () => UnfollowFolderInput) input: UnfollowFolderInput
   ): Promise<Folder> {
     return unfollowFolder(ctx, input)
   }
@@ -140,7 +140,7 @@ export class FolderResolver {
   @Mutation(() => Folder)
   async addPostToFolder(
     @Ctx() ctx: Context,
-    @Arg('input') input: AddPostToFolderInput,
+    @Arg('input', () => AddPostToFolderInput) input: AddPostToFolderInput,
     @PubSub(SubscriptionTopic.PostChanged)
     notifyPostChanged: Publisher<ChangePayload>
   ): Promise<Folder> {
@@ -151,7 +151,8 @@ export class FolderResolver {
   @Mutation(() => Folder)
   async removePostFromFolder(
     @Ctx() ctx: Context,
-    @Arg('input') input: RemovePostFromFolderInput,
+    @Arg('input', () => RemovePostFromFolderInput)
+    input: RemovePostFromFolderInput,
     @PubSub(SubscriptionTopic.PostChanged)
     notifyPostChanged: Publisher<ChangePayload>
   ): Promise<Folder> {

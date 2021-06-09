@@ -111,7 +111,7 @@ export class ServerResolver {
   @Query(() => [Server])
   async publicServers(
     @Ctx() ctx: Context,
-    @Args() args: PublicServersArgs
+    @Args(() => PublicServersArgs) args: PublicServersArgs
   ): Promise<Server[]> {
     return publicServers(ctx, args)
   }
@@ -125,7 +125,10 @@ export class ServerResolver {
   }
 
   @Query(() => Server, { nullable: true })
-  async server(@Ctx() ctx: Context, @Args() args: ServerArgs): Promise<Server> {
+  async server(
+    @Ctx() ctx: Context,
+    @Args(() => ServerArgs) args: ServerArgs
+  ): Promise<Server> {
     return server(ctx, args)
   }
 
@@ -134,7 +137,7 @@ export class ServerResolver {
   @Mutation(() => Server)
   async createServer(
     @Ctx() ctx: Context,
-    @Arg('input') input: CreateServerInput
+    @Arg('input', () => CreateServerInput) input: CreateServerInput
   ): Promise<Server> {
     return createServer(ctx, input)
   }
@@ -143,7 +146,7 @@ export class ServerResolver {
   @Mutation(() => Server)
   async updateServer(
     @Ctx() ctx: Context,
-    @Arg('input') input: UpdateServerInput
+    @Arg('input', () => UpdateServerInput) input: UpdateServerInput
   ): Promise<Server> {
     return updateServer(ctx, input)
   }
@@ -152,7 +155,7 @@ export class ServerResolver {
   @Mutation(() => ID)
   async deleteServer(
     @Ctx() ctx: Context,
-    @Arg('input') input: DeleteServerInput
+    @Arg('input', () => DeleteServerInput) input: DeleteServerInput
   ): Promise<string> {
     return deleteServer(ctx, input)
   }
@@ -161,7 +164,7 @@ export class ServerResolver {
   @Mutation(() => Server)
   async joinServer(
     @Ctx() ctx: Context,
-    @Arg('input') input: JoinServerInput,
+    @Arg('input', () => JoinServerInput) input: JoinServerInput,
     @PubSub(SubscriptionTopic.MessageChanged)
     notifyMessageChanged: Publisher<ChangePayload>
   ): Promise<Server> {
@@ -172,7 +175,7 @@ export class ServerResolver {
   @Mutation(() => Server)
   async leaveServer(
     @Ctx() ctx: Context,
-    @Arg('input') input: LeaveServerInput
+    @Arg('input', () => LeaveServerInput) input: LeaveServerInput
   ): Promise<Server> {
     return leaveServer(ctx, input)
   }
@@ -181,7 +184,7 @@ export class ServerResolver {
   @Mutation(() => GraphQLVoid)
   async moveServer(
     @Ctx() ctx: Context,
-    @Arg('input') input: MoveServerInput
+    @Arg('input', () => MoveServerInput) input: MoveServerInput
   ): Promise<void> {
     return moveServer(ctx, input)
   }
@@ -190,7 +193,7 @@ export class ServerResolver {
   @Mutation(() => Server)
   async readServer(
     @Ctx() ctx: Context,
-    @Arg('input') input: ReadServerInput
+    @Arg('input', () => ReadServerInput) input: ReadServerInput
   ): Promise<Server> {
     return readServer(ctx, input)
   }
@@ -199,7 +202,7 @@ export class ServerResolver {
   @Mutation(() => Boolean)
   async banUserFromServer(
     @Ctx() ctx: Context,
-    @Arg('input') input: BanUserFromServerInput
+    @Arg('input', () => BanUserFromServerInput) input: BanUserFromServerInput
   ): Promise<boolean> {
     return banUserFromServer(ctx, input)
   }
@@ -208,7 +211,8 @@ export class ServerResolver {
   @Mutation(() => Boolean)
   async unbanUserFromServer(
     @Ctx() ctx: Context,
-    @Arg('input') input: UnbanUserFromServerInput
+    @Arg('input', () => UnbanUserFromServerInput)
+    input: UnbanUserFromServerInput
   ): Promise<boolean> {
     return unbanUserFromServer(ctx, input)
   }
@@ -217,7 +221,7 @@ export class ServerResolver {
   @Mutation(() => Boolean)
   async kickUserFromServer(
     @Ctx() ctx: Context,
-    @Arg('input') input: KickUserFromServerInput
+    @Arg('input', () => KickUserFromServerInput) input: KickUserFromServerInput
   ): Promise<boolean> {
     return kickUserFromServer(ctx, input)
   }
@@ -226,7 +230,7 @@ export class ServerResolver {
   @Mutation(() => Server)
   async featureServer(
     @Ctx() ctx: Context,
-    @Arg('input') input: FeatureServerInput
+    @Arg('input', () => FeatureServerInput) input: FeatureServerInput
   ): Promise<Server> {
     return featureServer(ctx, input)
   }
@@ -235,7 +239,7 @@ export class ServerResolver {
   @Mutation(() => Server)
   async unfeatureServer(
     @Ctx() ctx: Context,
-    @Arg('input') input: UnfeatureServerInput
+    @Arg('input', () => UnfeatureServerInput) input: UnfeatureServerInput
   ): Promise<Server> {
     return unfeatureServer(ctx, input)
   }

@@ -5,18 +5,18 @@ import { Embeddable, Property } from '@mikro-orm/core'
 @ObjectType()
 export class File {
   @Property({ columnType: 'text' })
-  @Field()
+  @Field(() => String)
   url: string
 
   @Property({ columnType: 'text' })
-  @Field()
+  @Field(() => String)
   mime: string
 
   @Property({ columnType: 'text' })
-  @Field()
+  @Field(() => String)
   filename: string
 
   @Property()
-  @Field()
+  @Field(() => Number)
   size: number
 }

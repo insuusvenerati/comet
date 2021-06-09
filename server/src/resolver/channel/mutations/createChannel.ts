@@ -9,7 +9,7 @@ import {
   ServerPermission,
   User
 } from '@/entity'
-import {handleUnderscore, logger, ReorderUtils} from '@/util'
+import { handleUnderscore, logger, ReorderUtils } from '@/util'
 import { Matches, MaxLength } from 'class-validator'
 
 @InputType()
@@ -17,12 +17,12 @@ export class CreateChannelInput {
   @Field(() => ID)
   serverId: string
 
-  @Field()
+  @Field(() => String)
   @MaxLength(100)
   @Matches(/^[a-z0-9-_]+/)
   name: string
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   @MaxLength(500)
   description?: string
 

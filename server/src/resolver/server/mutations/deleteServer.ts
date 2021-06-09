@@ -2,14 +2,14 @@ import { Field, ID, InputType } from 'type-graphql'
 import { Context } from '@/types'
 import { Server, ServerUser, ServerUserStatus, User } from '@/entity'
 import * as argon2 from 'argon2'
-import {logger} from "@/util";
+import { logger } from '@/util'
 
 @InputType()
 export class DeleteServerInput {
   @Field(() => ID)
   serverId: string
 
-  @Field()
+  @Field(() => String)
   password: string
 }
 

@@ -47,7 +47,7 @@ export class MessageResolver {
   @Query(() => MessagesResponse)
   async messages(
     @Ctx() ctx: Context,
-    @Args()
+    @Args(() => MessagesArgs)
     args: MessagesArgs
   ): Promise<MessagesResponse> {
     return messages(ctx, args)
@@ -58,7 +58,7 @@ export class MessageResolver {
   @Mutation(() => Message)
   async createMessage(
     @Ctx() ctx: Context,
-    @Arg('input') input: CreateMessageInput,
+    @Arg('input', () => CreateMessageInput) input: CreateMessageInput,
     @PubSub(SubscriptionTopic.MessageChanged)
     notifyMessageChanged: Publisher<ChangePayload>,
     @PubSub(SubscriptionTopic.TypingUpdated)
@@ -71,7 +71,7 @@ export class MessageResolver {
   @Mutation(() => Message)
   async updateMessage(
     @Ctx() ctx: Context,
-    @Arg('input') input: UpdateMessageInput,
+    @Arg('input', () => UpdateMessageInput) input: UpdateMessageInput,
     @PubSub(SubscriptionTopic.MessageChanged)
     notifyMessageChanged: Publisher<ChangePayload>
   ): Promise<Message> {
@@ -82,7 +82,7 @@ export class MessageResolver {
   @Mutation(() => Boolean)
   async deleteMessage(
     @Ctx() ctx: Context,
-    @Arg('input') input: DeleteMessageInput,
+    @Arg('input', () => DeleteMessageInput) input: DeleteMessageInput,
     @PubSub(SubscriptionTopic.MessageChanged)
     notifyMessageChanged: Publisher<ChangePayload>
   ): Promise<boolean> {
@@ -93,7 +93,7 @@ export class MessageResolver {
   @Mutation(() => Message)
   async pinMessage(
     @Ctx() ctx: Context,
-    @Arg('input') input: PinMessageInput,
+    @Arg('input', () => PinMessageInput) input: PinMessageInput,
     @PubSub(SubscriptionTopic.MessageChanged)
     notifyMessageChanged: Publisher<ChangePayload>
   ): Promise<Message> {
@@ -104,7 +104,7 @@ export class MessageResolver {
   @Mutation(() => Message)
   async unpinMessage(
     @Ctx() ctx: Context,
-    @Arg('input') input: UnpinMessageInput,
+    @Arg('input', () => UnpinMessageInput) input: UnpinMessageInput,
     @PubSub(SubscriptionTopic.MessageChanged)
     notifyMessageChanged: Publisher<ChangePayload>
   ): Promise<Message> {

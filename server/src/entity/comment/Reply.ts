@@ -13,7 +13,7 @@ export class Reply extends BaseEntity {
   @ManyToOne(() => Comment)
   comment: Comment
 
-  @Field()
+  @Field(() => Boolean)
   @Property()
   isRead: boolean = false
 }

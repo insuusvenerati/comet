@@ -14,7 +14,7 @@ import {
   Resolver,
   Root
 } from 'type-graphql'
-import {LinkMetadata, Post, ServerUser, User, VoteType} from '@/entity'
+import { LinkMetadata, Post, ServerUser, User, VoteType } from '@/entity'
 import { Context } from '@/types'
 import {
   createPost,
@@ -37,7 +37,7 @@ import { IsUrl, MaxLength } from 'class-validator'
 
 @ArgsType()
 class GetLinkMetaArgs {
-  @Field()
+  @Field(() => String)
   @MaxLength(2000)
   @IsUrl()
   linkUrl: string
@@ -48,7 +48,7 @@ export class PostResolver {
   // --- Fields ---
   @FieldResolver(() => User, { nullable: true })
   async author(
-    @Ctx() { loaders: { postAuthorLoader }}: Context,
+    @Ctx() { loaders: { postAuthorLoader } }: Context,
     @Root() post: Post
   ): Promise<User> {
     return postAuthorLoader.load(post.id)
@@ -74,7 +74,7 @@ export class PostResolver {
   @Query(() => PostsResponse)
   async posts(
     @Ctx() ctx: Context,
-    @Args()
+    @Args(() => PostsArgs)
     args: PostsArgs
   ): Promise<PostsResponse> {
     return posts(ctx, args)
@@ -94,7 +94,7 @@ export class PostResolver {
   @Mutation(() => Post)
   async createPost(
     @Ctx() ctx: Context,
-    @Arg('input')
+    @Arg('input', () => CreatePostInput)
     input: CreatePostInput,
     @PubSub(SubscriptionTopic.PostChanged)
     notifyPostChanged: Publisher<ChangePayload>
@@ -106,7 +106,7 @@ export class PostResolver {
   @Mutation(() => Post)
   async updatePost(
     @Ctx() ctx: Context,
-    @Arg('input')
+    @Arg('input', () => UpdatePostInput)
     input: UpdatePostInput,
     @PubSub(SubscriptionTopic.PostChanged)
     notifyPostChanged: Publisher<ChangePayload>
@@ -118,7 +118,7 @@ export class PostResolver {
   @Mutation(() => Post)
   async deletePost(
     @Ctx() ctx: Context,
-    @Arg('input')
+    @Arg('input', () => DeletePostInput)
     input: DeletePostInput,
     @PubSub(SubscriptionTopic.PostChanged)
     notifyPostChanged: Publisher<ChangePayload>
@@ -130,7 +130,7 @@ export class PostResolver {
   @Mutation(() => Post)
   async updatePostVote(
     @Ctx() ctx: Context,
-    @Arg('input')
+    @Arg('input', () => UpdatePostVoteInput)
     input: UpdatePostVoteInput,
     @PubSub(SubscriptionTopic.PostChanged)
     notifyPostChanged: Publisher<ChangePayload>
@@ -142,7 +142,7 @@ export class PostResolver {
   @Mutation(() => Post)
   async pinPost(
     @Ctx() ctx: Context,
-    @Arg('input')
+    @Arg('input', () => PinPostInput)
     input: PinPostInput,
     @PubSub(SubscriptionTopic.PostChanged)
     notifyPostChanged: Publisher<ChangePayload>
@@ -154,7 +154,7 @@ export class PostResolver {
   @Mutation(() => Post)
   async unpinPost(
     @Ctx() ctx: Context,
-    @Arg('input')
+    @Arg('input', () => UnpinPostInput)
     input: UnpinPostInput,
     @PubSub(SubscriptionTopic.PostChanged)
     notifyPostChanged: Publisher<ChangePayload>
@@ -166,7 +166,7 @@ export class PostResolver {
   @Query(() => LinkMetadata, { nullable: true })
   async getLinkMeta(
     @Ctx() ctx: Context,
-    @Args() { linkUrl }: GetLinkMetaArgs
+    @Args(() => GetLinkMetaArgs) { linkUrl }: GetLinkMetaArgs
   ): Promise<LinkMetadata> {
     return scrapeMetadata(linkUrl.toString())
   }

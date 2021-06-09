@@ -44,6 +44,9 @@
 		"rimraf": "^3.0.2"
 	},
 	"dependencies": {
+		"esbuild": "^0.12.8",
+		"esbuild-node-externals": "^1.2.0",
+		"node-gyp": "^8.1.0",
 		"ts-invariant": "^0.7.3"
 	},
 	"resolutions": {

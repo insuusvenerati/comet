@@ -4,7 +4,9 @@ import {
   Authorized,
   Ctx,
   FieldResolver,
-  Mutation, Publisher, PubSub,
+  Mutation,
+  Publisher,
+  PubSub,
   Query,
   Resolver,
   Root
@@ -30,7 +32,7 @@ import {
 } from '@/resolver/user/mutations'
 import { user, UserArgs } from '@/resolver/user/queries'
 import { GraphQLNonNegativeInt } from 'graphql-scalars'
-import {ChangePayload, SubscriptionTopic} from "@/resolver/subscriptions";
+import { ChangePayload, SubscriptionTopic } from '@/resolver/subscriptions'
 
 @Resolver(() => User)
 export class UserResolver {
@@ -107,7 +109,10 @@ export class UserResolver {
   // --- Queries --- //
 
   @Query(() => User, { nullable: true })
-  async user(@Ctx() ctx: Context, @Args() args: UserArgs): Promise<User> {
+  async user(
+    @Ctx() ctx: Context,
+    @Args(() => UserArgs) args: UserArgs
+  ): Promise<User> {
     return user(ctx, args)
   }
 
@@ -116,8 +121,9 @@ export class UserResolver {
   @Mutation(() => LoginResponse)
   async createAccount(
     @Ctx() ctx: Context,
-    @Arg('input') input: CreateAccountInput,
-    @PubSub(SubscriptionTopic.MessageChanged) notifyMessageChanged: Publisher<ChangePayload>
+    @Arg('input', () => CreateAccountInput) input: CreateAccountInput,
+    @PubSub(SubscriptionTopic.MessageChanged)
+    notifyMessageChanged: Publisher<ChangePayload>
   ): Promise<LoginResponse> {
     return createAccount(ctx, input, notifyMessageChanged)
   }
@@ -126,7 +132,7 @@ export class UserResolver {
   @Mutation(() => User)
   async changePassword(
     @Ctx() ctx: Context,
-    @Arg('input')
+    @Arg('input', () => ChangePasswordInput)
     input: ChangePasswordInput
   ): Promise<User> {
     return changePassword(ctx, input)
@@ -136,7 +142,7 @@ export class UserResolver {
   @Mutation(() => Boolean)
   async deleteAccount(
     @Ctx() ctx: Context,
-    @Arg('input') input: DeleteAccountInput
+    @Arg('input', () => DeleteAccountInput) input: DeleteAccountInput
   ): Promise<boolean> {
     return deleteAccount(ctx, input)
   }
@@ -145,7 +151,7 @@ export class UserResolver {
   @Mutation(() => User)
   async changeUserAvatar(
     @Ctx() ctx: Context,
-    @Arg('input') input: ChangeUserAvatarInput
+    @Arg('input', () => ChangeUserAvatarInput) input: ChangeUserAvatarInput
   ): Promise<User> {
     return changeUserAvatar(ctx, input)
   }
@@ -153,7 +159,7 @@ export class UserResolver {
   @Mutation(() => LoginResponse)
   async login(
     @Ctx() ctx: Context,
-    @Arg('input') input: LoginInput
+    @Arg('input', () => LoginInput) input: LoginInput
   ): Promise<LoginResponse> {
     return login(ctx, input)
   }
@@ -162,7 +168,7 @@ export class UserResolver {
   @Mutation(() => User)
   async changeOnlineStatus(
     @Ctx() ctx: Context,
-    @Arg('input') input: ChangeOnlineStatusInput
+    @Arg('input', () => ChangeOnlineStatusInput) input: ChangeOnlineStatusInput
   ): Promise<User> {
     return changeOnlineStatus(ctx, input)
   }
@@ -171,7 +177,7 @@ export class UserResolver {
   @Mutation(() => Boolean)
   async globalBan(
     @Ctx() ctx: Context,
-    @Arg('input') input: GlobalBanInput
+    @Arg('input', () => GlobalBanInput) input: GlobalBanInput
   ): Promise<boolean> {
     return globalBan(ctx, input)
   }

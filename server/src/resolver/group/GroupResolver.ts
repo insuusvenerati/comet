@@ -23,7 +23,7 @@ export class GroupResolver {
   @Mutation(() => Group)
   async createGroup(
     @Ctx() ctx: Context,
-    @Arg('input') input: CreateGroupInput
+    @Arg('input', () => CreateGroupInput) input: CreateGroupInput
   ): Promise<Group> {
     return createGroup(ctx, input)
   }
@@ -32,7 +32,7 @@ export class GroupResolver {
   @Mutation(() => Group)
   async updateGroup(
     @Ctx() ctx: Context,
-    @Arg('input') input: UpdateGroupInput
+    @Arg('input', () => UpdateGroupInput) input: UpdateGroupInput
   ): Promise<Group> {
     return updateGroup(ctx, input)
   }
@@ -41,7 +41,7 @@ export class GroupResolver {
   @Mutation(() => Boolean)
   async leaveGroup(
     @Ctx() ctx: Context,
-    @Arg('input') input: LeaveGroupInput
+    @Arg('input', () => LeaveGroupInput) input: LeaveGroupInput
   ): Promise<boolean> {
     return leaveGroup(ctx, input)
   }
@@ -50,7 +50,7 @@ export class GroupResolver {
   @Mutation(() => Group)
   async readGroup(
     @Ctx() ctx: Context,
-    @Arg('input') input: ReadGroupInput
+    @Arg('input', () => ReadGroupInput) input: ReadGroupInput
   ): Promise<Group> {
     return readGroup(ctx, input)
   }
@@ -59,7 +59,8 @@ export class GroupResolver {
   @Mutation(() => Group)
   async removeUserFromGroup(
     @Ctx() ctx: Context,
-    @Arg('input') input: RemoveUserFromGroupInput
+    @Arg('input', () => RemoveUserFromGroupInput)
+    input: RemoveUserFromGroupInput
   ): Promise<Group> {
     return removeUserFromGroup(ctx, input)
   }
@@ -68,7 +69,7 @@ export class GroupResolver {
   @Mutation(() => Group)
   async addUserToGroup(
     @Ctx() ctx: Context,
-    @Arg('input') input: AddUserToGroupInput
+    @Arg('input', () => AddUserToGroupInput) input: AddUserToGroupInput
   ): Promise<Group> {
     return addUserToGroup(ctx, input)
   }

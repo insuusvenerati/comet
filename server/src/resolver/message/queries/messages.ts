@@ -4,7 +4,7 @@ import { Message, User } from '@/entity'
 import { Context } from '@/types'
 import { FilterQuery, QueryOrder } from '@mikro-orm/core'
 import { GraphQLPositiveInt } from 'graphql-scalars'
-import {logger} from "@/util";
+import { logger } from '@/util'
 
 @ArgsType()
 export class MessagesArgs {
@@ -17,7 +17,7 @@ export class MessagesArgs {
   @Field(() => ID, { nullable: true })
   userId?: string
 
-  @Field({ defaultValue: false })
+  @Field(() => Boolean, { defaultValue: false })
   pinned: boolean = false
 
   @Field(() => ID, { nullable: true })
@@ -31,7 +31,7 @@ export class MessagesArgs {
 
 @ObjectType()
 export class MessagesResponse {
-  @Field()
+  @Field(() => Boolean)
   hasMore: boolean
 
   @Field(() => [Message])

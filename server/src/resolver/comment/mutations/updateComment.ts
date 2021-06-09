@@ -2,7 +2,7 @@ import { Field, ID, InputType, Publisher } from 'type-graphql'
 import { Length } from 'class-validator'
 import { Context } from '@/types'
 import { Comment, User } from '@/entity'
-import {handleText, logger} from '@/util'
+import { handleText, logger } from '@/util'
 import { ChangePayload, ChangeType } from '@/resolver/subscriptions'
 
 @InputType()
@@ -10,7 +10,7 @@ export class UpdateCommentInput {
   @Field(() => ID)
   commentId: string
 
-  @Field()
+  @Field(() => String)
   @Length(1, 100000)
   text: string
 }

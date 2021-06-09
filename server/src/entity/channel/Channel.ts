@@ -15,11 +15,11 @@ import { GraphQLNonNegativeInt } from 'graphql-scalars'
 @ObjectType({ implements: BaseEntity })
 @Entity()
 export class Channel extends BaseEntity {
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   @Property({ nullable: true, columnType: 'text' })
   name: string
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   @Property({ nullable: true, columnType: 'text' })
   description?: string
 
@@ -48,10 +48,10 @@ export class Channel extends BaseEntity {
   @Field(() => GraphQLNonNegativeInt)
   mentionCount: number = 0
 
-  @Field()
+  @Field(() => Boolean)
   isUnread: boolean = true
 
-  @Field()
-  @Property({default: false})
+  @Field(() => Boolean)
+  @Property({ default: false })
   isDefault: boolean = false
 }

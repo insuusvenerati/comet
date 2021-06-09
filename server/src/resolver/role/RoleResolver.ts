@@ -18,7 +18,7 @@ export class RoleResolver {
   @Mutation(() => Role)
   async createRole(
     @Ctx() ctx: Context,
-    @Arg('input') input: CreateRoleInput
+    @Arg('input', () => CreateRoleInput) input: CreateRoleInput
   ): Promise<Role> {
     return createRole(ctx, input)
   }
@@ -27,7 +27,7 @@ export class RoleResolver {
   @Mutation(() => Role)
   async updateRole(
     @Ctx() ctx: Context,
-    @Arg('input') input: UpdateRoleInput
+    @Arg('input', () => UpdateRoleInput) input: UpdateRoleInput
   ): Promise<Role> {
     return updateRole(ctx, input)
   }
@@ -36,7 +36,7 @@ export class RoleResolver {
   @Mutation(() => ID)
   async deleteRole(
     @Ctx() ctx: Context,
-    @Arg('input') input: DeleteRoleInput
+    @Arg('input', () => DeleteRoleInput) input: DeleteRoleInput
   ): Promise<string> {
     return deleteRole(ctx, input)
   }
@@ -45,7 +45,7 @@ export class RoleResolver {
   @Mutation(() => ServerUser)
   async setUserRole(
     @Ctx() ctx: Context,
-    @Arg('input') input: SetUserRoleInput
+    @Arg('input', () => SetUserRoleInput) input: SetUserRoleInput
   ): Promise<ServerUser> {
     return setUserRole(ctx, input)
   }

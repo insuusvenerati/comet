@@ -29,15 +29,15 @@ import isURL from 'validator/lib/isURL'
 @ObjectType({ implements: BaseEntity })
 @Entity()
 export class Post extends BaseEntity {
-  @Field()
+  @Field(() => String)
   @Property({ columnType: 'text' })
   title: string
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   @Property({ nullable: true, columnType: 'text' })
   text?: string
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   @Property({ nullable: true, columnType: 'text' })
   linkUrl?: string
 
@@ -53,7 +53,7 @@ export class Post extends BaseEntity {
   @Embedded(() => PostImage, { object: true, array: true })
   images: PostImage[] = []
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   get thumbnailUrl(): string | null {
     if (this.images && this.images.length > 0)
       return this.images[0].image.smallUrl
@@ -65,7 +65,7 @@ export class Post extends BaseEntity {
     return null
   }
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   get domain(): string | null {
     if (!this.linkUrl) return null
     if (isURL(this.linkUrl)) {
@@ -83,11 +83,11 @@ export class Post extends BaseEntity {
   @Field(() => ServerUser, { nullable: true })
   serverUser?: ServerUser
 
-  @Field()
+  @Field(() => Boolean)
   @Property()
   isPinned: boolean = false
 
-  @Field({ nullable: true })
+  @Field(() => Date, { nullable: true })
   @Property({ nullable: true })
   pinnedAt?: Date
 
@@ -120,7 +120,7 @@ export class Post extends BaseEntity {
   @Property({ unsigned: true })
   commentCount: number = 0
 
-  @Field()
+  @Field(() => String)
   get relativeUrl(): string {
     const slug = this.title
       .toLowerCase()
@@ -139,11 +139,11 @@ export class Post extends BaseEntity {
   )
   hotRank: number
 
-  @Field({ nullable: true })
+  @Field(() => Date, { nullable: true })
   @Property({ nullable: true })
   updatedAt?: Date
 
-  @Field()
+  @Field(() => Date)
   @Property()
   isDeleted: boolean = false
 }

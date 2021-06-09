@@ -19,15 +19,15 @@ export class Group extends BaseEntity {
   @ManyToOne(() => User)
   owner: User
 
-  @Field()
+  @Field(() => String)
   @Property({ columnType: 'text' })
   name: string
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   @Property({ nullable: true, columnType: 'text' })
   avatarUrl?: string
 
-  @Field()
+  @Field(() => Date)
   @Property()
   lastMessageAt: Date = new Date()
 
@@ -41,7 +41,7 @@ export class Group extends BaseEntity {
   @OneToMany(() => Message, 'group')
   messages = new Collection<Message>(this)
 
-  @Field()
+  @Field(() => String)
   get displayName(): string {
     if (this.name) return this.name
     if (this.users.isInitialized())

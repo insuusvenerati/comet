@@ -29,7 +29,7 @@ import {
 import { MessageSubscriptionFilter } from '@/resolver/subscriptions/filters/MessageSubscriptionFilter'
 import { RepliesSubscriptionFilter } from '@/resolver/subscriptions/filters/RepliesSubscriptionFilter'
 import { TypingResponse } from '@/resolver/subscriptions/typing/TypingResponse'
-import {logger} from "@/util";
+import { logger } from '@/util'
 
 @ObjectType()
 class CommentChangedResponse extends ChangeResponse(Comment) {}
@@ -129,7 +129,7 @@ export class SubscriptionResolver {
   typingUpdated(
     @Root()
     { typingUserId, isTyping }: TypingPayload,
-    @Args() {}: TypingArgs
+    @Args(() => TypingArgs) {}: TypingArgs
   ): TypingResponse {
     logger('typingUpdated')
     return {
@@ -142,7 +142,8 @@ export class SubscriptionResolver {
   @Mutation(() => Boolean)
   async updateTyping(
     @Ctx() { userId: currentUserId }: Context,
-    @Arg('input') { channelId, groupId, userId, isTyping }: TypingInput,
+    @Arg('input', () => TypingInput)
+    { channelId, groupId, userId, isTyping }: TypingInput,
     @PubSub(SubscriptionTopic.TypingUpdated)
     notifyTypingUpdated: Publisher<TypingPayload>
   ): Promise<boolean> {

@@ -7,15 +7,15 @@ import { GraphQLNonNegativeInt } from 'graphql-scalars'
 @ObjectType({ implements: BaseEntity })
 @Entity()
 export class Folder extends BaseEntity {
-  @Field()
+  @Field(() => String)
   @Property({ columnType: 'text' })
   name: string
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   @Property({ nullable: true, columnType: 'text' })
   description?: string
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   @Property({ nullable: true, columnType: 'text' })
   avatarUrl?: string
 
@@ -38,10 +38,10 @@ export class Folder extends BaseEntity {
   @Property()
   followerCount: number = 0
 
-  @Field()
+  @Field(() => Boolean)
   isFollowing: boolean
 
-  @Field()
+  @Field(() => Boolean)
   @Property()
   isCollaborative: boolean = false
 

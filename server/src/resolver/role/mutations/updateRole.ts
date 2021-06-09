@@ -3,14 +3,14 @@ import { IsHexColor, Length } from 'class-validator'
 import { Role, ServerPermission, User } from '@/entity'
 import { Context } from '@/types'
 import { GraphQLHexColorCode } from 'graphql-scalars'
-import {logger} from "@/util";
+import { logger } from '@/util'
 
 @InputType()
 export class UpdateRoleInput {
   @Field(() => ID)
   roleId: string
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   @Length(1, 100)
   name?: string
 

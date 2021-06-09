@@ -10,10 +10,10 @@ export class PostImage {
   image: Image
 
   @Property({ nullable: true, columnType: 'text' })
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   linkUrl?: string
 
   @Property({ nullable: true, columnType: 'text' })
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   caption?: string
 }

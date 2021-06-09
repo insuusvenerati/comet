@@ -3,7 +3,7 @@ import { Field, InputType } from 'type-graphql'
 import { User } from '@/entity'
 import * as argon2 from 'argon2'
 import { CustomError } from '@/types/CustomError'
-import {createAccessToken, handleUnderscore, logger} from '@/util'
+import { createAccessToken, handleUnderscore, logger } from '@/util'
 import { LoginResponse } from '@/resolver/user/mutations/LoginResponse'
 import { createLoaders } from '@/util/loaders'
 import { GraphQLEmailAddress } from 'graphql-scalars'
@@ -13,10 +13,10 @@ export class LoginInput {
   @Field(() => GraphQLEmailAddress, { nullable: true })
   email?: string
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   username?: string
 
-  @Field()
+  @Field(() => String)
   password: string
 }
 

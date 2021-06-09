@@ -31,7 +31,7 @@ export class Comment extends BaseEntity {
   @ManyToOne(() => Post)
   post: Post
 
-  @Field()
+  @Field(() => String)
   @Property({ columnType: 'text' })
   text: string
 
@@ -49,19 +49,19 @@ export class Comment extends BaseEntity {
   @OneToMany(() => CommentVote, 'comment')
   votes = new Collection<CommentVote>(this)
 
-  @Field()
+  @Field(() => Boolean)
   @Property()
   isPinned: boolean = false
 
-  @Field({ nullable: true })
+  @Field(() => Date, { nullable: true })
   @Property({ nullable: true })
   pinnedAt?: Date
 
-  @Field({ nullable: true })
+  @Field(() => Date, { nullable: true })
   @Property({ nullable: true })
   updatedAt?: Date
 
-  @Field()
+  @Field(() => Boolean)
   @Property()
   isDeleted: boolean = false
 

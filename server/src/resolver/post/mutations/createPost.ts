@@ -2,35 +2,29 @@ import { Field, ID, InputType, Publisher } from 'type-graphql'
 import { ArrayMaxSize, Length, MaxLength, IsUrl } from 'class-validator'
 import { FileUpload, GraphQLUpload } from 'graphql-upload'
 import { Context } from '@/types'
-import {
-  Post,
-  PostImage,
-  PostVote,
-  Server,
-  User,
-  VoteType
-} from '@/entity'
+import { Post, PostImage, PostVote, Server, User, VoteType } from '@/entity'
 import {
   handleText,
-  imageMimeTypes, logger,
+  imageMimeTypes,
+  logger,
   scrapeMetadata,
-  uploadImageFile,
+  uploadImageFile
 } from '@/util'
 import { ChangePayload, ChangeType } from '@/resolver/subscriptions'
 import mime from 'mime'
 
 @InputType()
 export class CreatePostInput {
-  @Field()
+  @Field(() => String)
   @Length(1, 300, { message: 'Title must be no longer than 300 characters.' })
   title: string
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   @MaxLength(2000, { message: 'URL must be no longer than 2000 characters.' })
   @IsUrl()
   linkUrl?: string
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   @MaxLength(100000, {
     message: 'Text max length is 100000 characters'
   })
@@ -49,11 +43,11 @@ class CreatePostImagesInput {
   @Field(() => GraphQLUpload)
   file: FileUpload
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   @MaxLength(180)
   caption?: string
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   @MaxLength(2000)
   @IsUrl()
   linkUrl?: string

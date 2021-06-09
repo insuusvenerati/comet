@@ -10,18 +10,18 @@ import {
   UserFolder
 } from '@/entity'
 import { Length } from 'class-validator'
-import {logger} from "@/util";
+import { logger } from '@/util'
 
 @InputType()
 export class CreateFolderInput {
   @Field(() => ID, { nullable: true })
   serverId?: string
 
-  @Field()
+  @Field(() => String)
   @Length(1, 100)
   name: string
 
-  @Field({ defaultValue: false })
+  @Field(() => Boolean, { defaultValue: false })
   isCollaborative: boolean = false
 
   @Field(() => FolderVisibility, {

@@ -49,9 +49,7 @@ module.exports = {
     const mainWindow = new BrowserWindow(options);
 
     const port = process.env.PORT || 3000;
-    const url = isDev
-      ? `http://localhost:${port}`
-      : join(__dirname, "../dist/index.html");
+    const url = isDev ? `https://comet.stiforr.tech` : join(__dirname, "../dist/index.html");
 
     isDev ? mainWindow?.loadURL(url) : mainWindow?.loadFile(url);
 

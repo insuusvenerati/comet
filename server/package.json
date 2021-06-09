@@ -5,6 +5,7 @@
   "engines": {
     "node": "16.x.x"
   },
+  "main": "src/index.ts",
   "scripts": {
     "start": "cross-env NODE_ENV=production NODE_TLS_REJECT_UNAUTHORIZED=0 ts-node -r tsconfig-paths/register --transpile-only src/index.ts",
     "dev": "cross-env NODE_ENV=development ts-node-dev -r tsconfig-paths/register src/index.ts",
@@ -56,6 +57,7 @@
     "mudder": "^1.0.10",
     "nanoid": "^3.1.23",
     "node-html-parser": "^3.3.4",
+    "parcel-bundler": "^1.12.5",
     "reflect-metadata": "^0.1.13",
     "sanitize-html": "^2.4.0",
     "sharp": "^0.28.3",
