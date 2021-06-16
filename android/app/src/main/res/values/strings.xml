@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">comet</string>
+    <string name="title_activity_main">comet</string>
+    <string name="package_name">app.joincomet</string>
+    <string name="custom_url_scheme">app.joincomet</string>
+</resources>

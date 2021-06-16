@@ -1,0 +1,6 @@
+{
+	"appId": "app.joincomet",
+	"appName": "comet",
+	"webDir": "web/dist",
+	"bundledWebRuntime": false
+}
